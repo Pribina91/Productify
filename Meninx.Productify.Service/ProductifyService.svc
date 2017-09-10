@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Meninx.Productify.Service.ProductifyService" CodeBehind="ProductifyService.svc.cs" %>
