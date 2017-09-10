@@ -8,7 +8,7 @@ using Meninx.Productify.Data.Models;
 
 namespace Meninx.Productify.Data.Context
 {
-    class ProductifyContext : DbContext
+    public class ProductifyContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Attribute> Atrributes { get; set; }

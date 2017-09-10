@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using Meninx.Productify.Data.Context;
 
 namespace Meninx.Productify.Service
 {
@@ -12,9 +13,11 @@ namespace Meninx.Productify.Service
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ProductifyService : IProductifyService, IDisposable
     {
+        private ProductifyContext _context;
+
         public ProductifyService()
         {
-            //_context = new pRoducontext
+            _context = new ProductifyContext();
         }
 
         public string GetData(int value)
@@ -37,7 +40,10 @@ namespace Meninx.Productify.Service
 
         public void Dispose()
         {
-            //EntityFrameWorkObject.Dispose();
+            if (_context != null)
+            {
+                _context.Dispose();
+            }
         }
     }
 }

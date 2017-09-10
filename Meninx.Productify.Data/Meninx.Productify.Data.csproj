@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ProductifyContext.cs" />
+    <Compile Include="Migrations\201709101550580_Init.cs" />
+    <Compile Include="Migrations\201709101550580_Init.Designer.cs">
+      <DependentUpon>201709101550580_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AttributeType.cs" />
     <Compile Include="Models\Attribute.cs" />
@@ -62,6 +66,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709101550580_Init.resx">
+      <DependentUpon>201709101550580_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
