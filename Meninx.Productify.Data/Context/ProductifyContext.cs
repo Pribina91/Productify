@@ -10,6 +10,15 @@ namespace Meninx.Productify.Data.Context
 {
     public class ProductifyContext : DbContext
     {
+        public ProductifyContext() : base("name=ProductifyContext")
+        {
+        }
+
+        public new IDbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
+        {
+            return base.Set<TEntity>();
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Attribute> Atrributes { get; set; }
         public DbSet<StringAtrribute> StringAtrributes { get; set; }
