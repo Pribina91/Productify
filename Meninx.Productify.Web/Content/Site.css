@@ -33,3 +33,6 @@ textarea {
 .fa {
     color: black;
 }
+.link {
+    cursor: pointer;
+}

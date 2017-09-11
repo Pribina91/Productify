@@ -30,7 +30,7 @@ namespace Meninx.Productify.Web
 
             return Datalist;
         }
-        protected List<AttributeContract> GetProductDetail(int productId)
+        public List<AttributeContract> GetProductDetail(int productId)
         {
             return this._service.GetProductAttributes(productId).ToList();
         }

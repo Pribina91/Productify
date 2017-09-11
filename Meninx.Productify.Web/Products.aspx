@@ -5,13 +5,30 @@
     <div class="row">
         <div class="col-xs-12">
             <table class="table table-striped">
-                <tr >
-                    <th width="25"></th>
-                    <th >Name</th>
-                    <th >Code</th>
-                    <th >Price</th>
-                    <th width="100"></th>
-                </tr>
+                <thead>
+                    <tr >
+                        <th width="25"></th>
+                        <th >Name</th>
+                        <th >Code</th>
+                        <th >Price</th>
+                        <th width="100"></th>
+                    </tr>                
+                    <tr >
+                        <td ></td>
+                        <td >
+                            <div class="filter">
+                                <input class="form-control" id="nameFilter"/>
+                            </div>
+                        </td>
+                        <td >  <div class="filter">
+                            <input class="form-control" id="codeFilter"/>
+                        </div>
+                        </td>
+
+                        <td ></td>
+                        <td></td>
+                    </tr>
+                </thead>
                 <asp:Repeater id="productList" runat="server">
                     <ItemTemplate>
                         <tr onclick="openProductDetail(event)" data-product-id="<%# Eval("Id")%>">
@@ -21,10 +38,10 @@
                             <td><%# Eval("Code")%></td>
                             <td><%# Eval("Price")%></td>
                             <td>
-                                <a title="Edit" class="link">
+                                <a title="Edit" class="link" onclick="editProduct(event)">
                                     <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true" style="padding-right: 5px"></span>
                                 </a>
-                                <a title="Delete" class="link">
+                                <a title="Delete" class="link" onclick="deleteProduct(event)">
                                     <span class="fa fa-times-circle fa-lg" aria-hidden="true" style="padding-right: 5px"></span>
                                 </a>
                             </td>
@@ -37,17 +54,18 @@
 
     <script>
         function openProductDetail(event) {
-            if (event == null || event.sender == null) {
+            debugger;
+            if (event == null || event.target == null) {
                 return;
             }
 
-            var sender = event.sender;
+            var sender = event.target;
 
-            var productId = $(sender).data("product-id");
+            var productId = $(sender).closest("tr").data("product-id");
             $.ajax({
-                type: "POST",
-                url: "Products.aspx/GetProductDetail",
-                data: productId,
+                type: "Get",
+                url: "Products.aspx/GetProductDetail?productId=" + productId,
+
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -59,17 +77,16 @@
             });
         }
         function editProduct(event) {
-            if (event == null || event.sender == null) {
+            if (event == null || event.target == null) {
                 return;
             }
 
-            var sender = event.sender;
+            var sender = event.target;
 
-            var productId = $(sender).data("product-id");
+            var productId = $(sender).closest("tr").data("product-id");
             $.ajax({
                 type: "POST",
-                url: "Products.aspx/GetProductDetail",
-                data: productId,
+                url: "Products.aspx/GetProductDetail?productId=" + productId,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -81,16 +98,16 @@
             });
         }
         function deleteProduct(event) {
-            if (event == null || event.sender == null) {
+            if (event == null || event.target == null) {
                 return;
             }
 
-            var sender = event.sender;
+            var sender = event.target;
 
             var productId = $(sender).data("product-id");
             $.ajax({
                 type: "POST",
-                url: "Products.aspx/GetProductDetail",
+                url: "Products.aspx/DeleteProduct",
                 data: productId,
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
