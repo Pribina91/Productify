@@ -12,7 +12,7 @@ namespace Meninx.Productify.Web
     {
         protected List<ProductContract> Datalist;
 
-        private ProductifyServiceClient _service;
+        private static ProductifyServiceClient _service;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +21,9 @@ namespace Meninx.Productify.Web
             GetProducts(null, null);
         }
 
-        protected List<ProductContract> GetProducts(string productName, string code)
+
+        [System.Web.Services.WebMethod]
+        public List<ProductContract> GetProducts(string productName, string code)
         {
             Datalist = _service.GetData(productName, code).ToList();
             
@@ -30,19 +32,57 @@ namespace Meninx.Productify.Web
 
             return Datalist;
         }
-        public List<AttributeContract> GetProductDetail(int productId)
+        [System.Web.Services.WebMethod]
+        public static List<AttributeContract> GetProductDetail(int productId)
         {
-            return this._service.GetProductAttributes(productId).ToList();
+            return _service.GetProductAttributes(productId).ToList();
+        }
+
+        [System.Web.Services.WebMethod]
+        public static void UpdateProduct(ProductContract product)
+        {
+            _service.UpdateProduct(product);
+        }
+        [System.Web.Services.WebMethod]
+        public static void DeleteProduct(int productId)
+        {
+            _service.RemoveProduct(productId);
+        }
+        [System.Web.Services.WebMethod]
+        public static void CreateProduct(string name, string code, string price)
+        {
+            int priceNumber;
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException(nameof(name));
+            }
+            if (string.IsNullOrEmpty(code))
+            {
+                throw new ArgumentException(nameof(code));
+            }
+            if (!int.TryParse(price, out priceNumber))
+            {
+                throw new ArgumentException(nameof(priceNumber));
+            }
+
+            var newProduct = new ProductContract()
+            {
+                Code = code,
+                Name = name,
+                Price = priceNumber,
+            };
+             
+            _service.AddProduct(newProduct);
         }
 
         public override void Dispose()
         {
             base.Dispose();
 
-            if (_service != null)
-            {
-                _service.Close();
-            }
+            //if (_service != null)
+            //{
+            //    _service.Close();
+            //}
         }
     }
 }

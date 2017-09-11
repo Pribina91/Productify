@@ -19,6 +19,7 @@ namespace Meninx.Productify.Service.Configuration
             {
                 cfg.CreateMap<Meninx.Productify.Data.Models.Attribute, AttributeContract>();
                 cfg.CreateMap<Product, ProductContract>();
+                cfg.CreateMap<ProductContract, Product>();
                 //.ForMember(m => m.Attributes, o => o.UseDestinationValue());
                 //cfg.AddProfile<FooProfile>();
             });
