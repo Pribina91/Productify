@@ -5,7 +5,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using Meninx.Productify.Data;
 using Meninx.Productify.Data.Context;
+using Meninx.Productify.Data.Models;
 
 namespace Meninx.Productify.Service
 {
@@ -13,37 +15,88 @@ namespace Meninx.Productify.Service
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ProductifyService : IProductifyService, IDisposable
     {
-        private ProductifyContext _context;
+        private UnitOfWork unitOfWork = new UnitOfWork();
+        private Repository<Product> productRepository;
+
 
         public ProductifyService()
         {
-            _context = new ProductifyContext();
+            productRepository = unitOfWork.Repository<Product>();
         }
 
-        public string GetData(int value)
+        public IQueryable<Product> GetData(string productName, string attributeName)
         {
-            return string.Format("You entered: {0}", value);
+            try
+            {
+                var query = productRepository.Table;
+
+                if (!string.IsNullOrEmpty(productName))
+                {
+                    query = query.Where(
+                        q => q.Name != null
+                             && q.Name.ToLower().Trim().Contains(productName));
+                }
+
+                if (!string.IsNullOrEmpty(attributeName))
+                {
+                    query = query.Where(
+                        q => q.Attributes != null
+                             && q.Attributes.Any(a => a.GetStringedValue().ToLower().Trim().Contains(attributeName)));
+                }
+
+                return query;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public void AddProduct(Product product)
         {
-            if (composite == null)
+            try
             {
-                throw new ArgumentNullException("composite");
+                productRepository.Insert(product);
             }
-            if (composite.BoolValue)
+            catch (Exception e)
             {
-                composite.StringValue += "Suffix";
+                Console.WriteLine(e);
+                throw;
             }
-            return composite;
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            try
+            {
+                productRepository.Update(product);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void RemoveProduct(int productId)
+        {
+            try
+            {
+                var product = productRepository.GetById(productId);
+                productRepository.Delete(product);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void Dispose()
         {
-            if (_context != null)
-            {
-                _context.Dispose();
-            }
+            unitOfWork.Dispose();
+            //base.Dispose(disposing);
         }
     }
 }

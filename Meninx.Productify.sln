@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Console",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Data", "Meninx.Productify.Data\Meninx.Productify.Data.csproj", "{DBDEAD2E-7BF6-4D79-9629-501D2DA9BB9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Core", "Meninx.Productify.Core\Meninx.Productify.Core.csproj", "{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DBDEAD2E-7BF6-4D79-9629-501D2DA9BB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBDEAD2E-7BF6-4D79-9629-501D2DA9BB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBDEAD2E-7BF6-4D79-9629-501D2DA9BB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,19 +13,19 @@ namespace Meninx.Productify.Console
     {
         static void Main(string[] args)
         {
-            ServiceHost studentServiceHost = null;
+            ServiceHost host = null;
             try
             {
                 //Base Address for StudentService
                 Uri httpBaseAddress = new Uri("http://localhost:4321/ProductifyService");
 
                 //Instantiate ServiceHost
-                studentServiceHost = new ServiceHost(
+                host = new ServiceHost(
                     typeof(ProductifyService),
                     httpBaseAddress);
 
                 //Add Endpoint to Host
-                studentServiceHost.AddServiceEndpoint(
+                host.AddServiceEndpoint(
                     typeof(IProductifyService),
                     new WSHttpBinding(),
                     "");
@@ -33,17 +33,17 @@ namespace Meninx.Productify.Console
                 //Metadata Exchange
                 ServiceMetadataBehavior serviceBehavior = new ServiceMetadataBehavior();
                 serviceBehavior.HttpGetEnabled = true;
-                studentServiceHost.Description.Behaviors.Add(serviceBehavior);
+                host.Description.Behaviors.Add(serviceBehavior);
 
                 //Open
-                studentServiceHost.Open();
+                host.Open();
                 System.Console.WriteLine("Service is live now at : {0}", httpBaseAddress);
                 System.Console.ReadKey();
             }
 
             catch (Exception ex)
             {
-                studentServiceHost = null;
+                host = null;
                 System.Console.WriteLine("There is an issue with StudentService" + ex.Message);
             }
         }

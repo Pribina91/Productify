@@ -43,10 +43,8 @@ namespace Meninx.Productify.Data
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        errorMessage += string.Format(
-                                            "Property: {0} Error: {1}",
-                                            validationError.PropertyName,
-                                            validationError.ErrorMessage) + Environment.NewLine;
+                        errorMessage += $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}"
+                                        + Environment.NewLine;
                     }
                 }
                 throw new Exception(errorMessage, dbEx);
@@ -69,10 +67,8 @@ namespace Meninx.Productify.Data
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        errorMessage += Environment.NewLine + string.Format(
-                                            "Property: {0} Error: {1}",
-                                            validationError.PropertyName,
-                                            validationError.ErrorMessage);
+                        errorMessage += Environment.NewLine
+                                        + $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}";
                     }
                 }
 
@@ -98,31 +94,16 @@ namespace Meninx.Productify.Data
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        errorMessage += Environment.NewLine + string.Format(
-                                            "Property: {0} Error: {1}",
-                                            validationError.PropertyName,
-                                            validationError.ErrorMessage);
+                        errorMessage += Environment.NewLine
+                                        + $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}";
                     }
                 }
                 throw new Exception(errorMessage, dbEx);
             }
         }
 
-        public virtual IQueryable<T> Table
-        {
-            get { return this.Entities; }
-        }
+        public virtual IQueryable<T> Table => this.Entities;
 
-        private IDbSet<T> Entities
-        {
-            get
-            {
-                if (entities == null)
-                {
-                    entities = context.Set<T>();
-                }
-                return entities;
-            }
-        }
+        private IDbSet<T> Entities => entities ?? (entities = context.Set<T>());
     }
 }
