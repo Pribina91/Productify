@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\IProductifyContext.cs" />
     <Compile Include="Context\ProductifyContext.cs" />
     <Compile Include="Migrations\201709101550580_Init.cs" />
     <Compile Include="Migrations\201709101550580_Init.Designer.cs">

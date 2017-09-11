@@ -33,6 +33,8 @@ namespace Meninx.Productify.Web
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                            "~/Scripts/toastr.min.js"));
 
             ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",

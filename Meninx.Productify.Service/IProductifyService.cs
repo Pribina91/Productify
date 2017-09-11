@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using Meninx.Productify.Data.Models;
+using Meninx.Productify.Service.Contracts;
 
 namespace Meninx.Productify.Service
 {
@@ -14,15 +15,18 @@ namespace Meninx.Productify.Service
     public interface IProductifyService
     {
         [OperationContract]
-        IQueryable<Product> GetData(string productName, string attributeName);
+        List<ProductContract> GetData(string productName, string code);
 
         [OperationContract]
-        void AddProduct(Product product);
+        void AddProduct(ProductContract product);
 
         [OperationContract]
-        void UpdateProduct(Product product);
+        void UpdateProduct(ProductContract product);
 
         [OperationContract]
         void RemoveProduct(int productId);
+
+        [OperationContract]
+        List<AttributeContract> GetProductAttributes(int productId);
     }
 }

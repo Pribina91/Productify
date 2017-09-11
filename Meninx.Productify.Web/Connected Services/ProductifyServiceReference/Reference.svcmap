@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="192e02e0-2f3b-4882-acbb-3225373f8df3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4321/ProductifyService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProductifyService3.xsd" MetadataType="Schema" ID="96ea8e0b-f402-4858-895c-ba1b51f2c5e6" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd0" />
+    <MetadataFile FileName="ProductifyService1.xsd" MetadataType="Schema" ID="3275f151-3991-4172-9afc-9b682ea9ca7d" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd1" />
+    <MetadataFile FileName="ProductifyService.wsdl" MetadataType="Wsdl" ID="36563e5d-d2ee-4122-94bd-3cc95805b9cc" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?wsdl" />
+    <MetadataFile FileName="ProductifyService.disco" MetadataType="Disco" ID="a797e218-2c2e-4968-8847-9229229d4598" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?disco" />
+    <MetadataFile FileName="ProductifyService.xsd" MetadataType="Schema" ID="abb5e355-abef-4c22-805a-14f31a94a4b5" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

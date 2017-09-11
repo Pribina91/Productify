@@ -8,7 +8,7 @@ using Meninx.Productify.Data.Models;
 
 namespace Meninx.Productify.Data.Context
 {
-    public class ProductifyContext : DbContext
+    public class ProductifyContext : IProductifyContext
     {
         public ProductifyContext() : base("name=ProductifyContext")
         {
@@ -19,11 +19,11 @@ namespace Meninx.Productify.Data.Context
             return base.Set<TEntity>();
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Attribute> Atrributes { get; set; }
-        public DbSet<StringAtrribute> StringAtrributes { get; set; }
-        public DbSet<IntegerAtrribute> IntegerAtrributes { get; set; }
-        public DbSet<DatetimeAtrribute> DatetimeAtrributes { get; set; }
-        public DbSet<AttributeType> AttributeTypes { get; set; }
+        public override DbSet<Product> Products { get; set; }
+        public override DbSet<Attribute> Atrributes { get; set; }
+        public override DbSet<StringAtrribute> StringAtrributes { get; set; }
+        public override DbSet<IntegerAtrribute> IntegerAtrributes { get; set; }
+        public override DbSet<DatetimeAtrribute> DatetimeAtrributes { get; set; }
+        public override DbSet<AttributeType> AttributeTypes { get; set; }
     }
 }

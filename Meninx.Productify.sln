@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Service", "Meninx.Productify.Service\Meninx.Productify.Service.csproj", "{35EEFDDF-04C6-4FC4-BC4B-AE127D2B43D4}"
 EndProject
@@ -10,6 +10,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Data", "Meninx.Productify.Data\Meninx.Productify.Data.csproj", "{DBDEAD2E-7BF6-4D79-9629-501D2DA9BB9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Core", "Meninx.Productify.Core\Meninx.Productify.Core.csproj", "{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Web", "Meninx.Productify.Web\Meninx.Productify.Web.csproj", "{A7EE51EB-05A2-4AA0-8198-26F771CE7A4D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35EEFDDF-04C6-4FC4-BC4B-AE127D2B43D4} = {35EEFDDF-04C6-4FC4-BC4B-AE127D2B43D4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meninx.Productify.Core.Tests", "Meninx.Productify.Core.Tests\Meninx.Productify.Core.Tests.csproj", "{4B1C845D-B053-46F8-B01E-1C9EB7C8762B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +40,14 @@ Global
 		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADFFB17E-BC10-4622-8A70-B75ECDF6B11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7EE51EB-05A2-4AA0-8198-26F771CE7A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7EE51EB-05A2-4AA0-8198-26F771CE7A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7EE51EB-05A2-4AA0-8198-26F771CE7A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7EE51EB-05A2-4AA0-8198-26F771CE7A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B1C845D-B053-46F8-B01E-1C9EB7C8762B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1C845D-B053-46F8-B01E-1C9EB7C8762B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1C845D-B053-46F8-B01E-1C9EB7C8762B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1C845D-B053-46F8-B01E-1C9EB7C8762B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

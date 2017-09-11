@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Meninx.Productify.Data.Context;
 using Meninx.Productify.Data.Models;
 
-namespace Meninx.Productify.Data
+namespace Meninx.Productify.Core
 {
-    public class Repository<T> where T : BaseEntity
+    public class Repository<T> where T:BaseEntity
     {
-        private readonly ProductifyContext context;
-        private IDbSet<T> entities;
-        string errorMessage = string.Empty;
+        protected readonly IProductifyContext context;
+        protected IDbSet<T> entities;
+        protected string errorMessage = string.Empty;
 
-        public Repository(ProductifyContext context)
+        public Repository(IProductifyContext context)
         {
             this.context = context;
         }
@@ -104,6 +101,6 @@ namespace Meninx.Productify.Data
 
         public virtual IQueryable<T> Table => this.Entities;
 
-        private IDbSet<T> Entities => entities ?? (entities = context.Set<T>());
+        protected IDbSet<T> Entities => entities ?? (entities = context.Set<T>());
     }
 }
