@@ -5,37 +5,34 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Meninx.Productify.Web.ProductifyServiceReference;
+using Newtonsoft.Json;
 
 namespace Meninx.Productify.Web
 {
     public partial class Products : System.Web.UI.Page
     {
-        protected List<ProductContract> Datalist;
+        //protected List<ProductContract> Datalist;
 
         private static ProductifyServiceClient _service;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _service = new ProductifyServiceReference.ProductifyServiceClient();
-
-            GetProducts(null, null);
+            Page.ClientScript.RegisterClientScriptInclude("Product", ResolveUrl("~/Scripts/Pages/Products.js"));
         }
 
 
         [System.Web.Services.WebMethod]
-        public List<ProductContract> GetProducts(string productName, string code)
+        public static string GetProducts(string productName, string code)
         {
-            Datalist = _service.GetData(productName, code).ToList();
-            
-            productList.DataSource = Datalist;
-            productList.DataBind();
-
-            return Datalist;
+            var list = _service.GetData(productName, code).ToList();
+            return JsonConvert.SerializeObject(list);
         }
+
         [System.Web.Services.WebMethod]
-        public static List<AttributeContract> GetProductDetail(int productId)
+        public static string GetProductDetail(int productId)
         {
-            return _service.GetProductAttributes(productId).ToList();
+            return JsonConvert.SerializeObject(_service.GetProductAttributes(productId).ToList());
         }
 
         [System.Web.Services.WebMethod]
@@ -43,11 +40,13 @@ namespace Meninx.Productify.Web
         {
             _service.UpdateProduct(product);
         }
+
         [System.Web.Services.WebMethod]
         public static void DeleteProduct(int productId)
         {
             _service.RemoveProduct(productId);
         }
+
         [System.Web.Services.WebMethod]
         public static void CreateProduct(string name, string code, string price)
         {
@@ -71,7 +70,7 @@ namespace Meninx.Productify.Web
                 Name = name,
                 Price = priceNumber,
             };
-             
+
             _service.AddProduct(newProduct);
         }
 

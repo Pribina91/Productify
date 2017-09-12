@@ -36,3 +36,11 @@ textarea {
 .link {
     cursor: pointer;
 }
+.vertical-align-center {
+    display: flex;
+    align-items: center;
+}
+.btn {
+    display: inline-block;
+    margin-left: 5px;
+}
