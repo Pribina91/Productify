@@ -166,8 +166,8 @@ function addAttribute(event) {
     var sender = event.target;
     var attributeTypeId = $(sender).data("attribute-type-id");
     var attributeName = $(sender).data("attribute-name");
-
     $(sender).closest("tr").find(".attribute-list").append(getAttributeHtml(attributeTypeId, attributeName, ""));
+    $(sender).parent().hide();
 }
 
 function openProductDetail(event) {
@@ -178,6 +178,14 @@ function openProductDetail(event) {
     $(".edit-mode").hide();
     var lineOfInterest = $(sender).closest("tr");
     lineOfInterest.find(".dropdownHolder").html($("#ddAttributeTypeList").html());
+
+    //hide attributes already added
+
+    lineOfInterest.find(".dropdownHolder li").show();
+    lineOfInterest.find(".attribute-edit").each(function (index, element) {
+        var existingType = $(element).data("type-id");
+        lineOfInterest.find(".dropdownHolder a[data-attribute-type-id='" + existingType + "']").parent().hide();
+    });
     lineOfInterest.find(".read-mode").hide();
     lineOfInterest.find(".edit-mode").show();
 

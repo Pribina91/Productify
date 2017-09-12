@@ -22,7 +22,8 @@ namespace Meninx.Productify.Core.Tests
         [TestMethod]
         public void Should_ReturnProducts()
         {
-            var products = new FakeDbSet<Product>(){
+            var products = new FakeDbSet<Product>()
+            {
                 new Product()
                 {
                     Code = "aaa",
@@ -80,7 +81,6 @@ namespace Meninx.Productify.Core.Tests
             Assert.AreEqual(1, prods.Count);
             Assert.AreEqual("aaa", prods[0].Code);
             Assert.AreEqual("AAA", prods[0].Name);
-          
         }
     }
 }
