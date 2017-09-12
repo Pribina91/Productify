@@ -9,28 +9,33 @@
                     <tr >
                         <th >Name</th>
                         <th >Code</th>
-                        <th >Price</th>
-                        <th width="150">
+                        <th >Price</th> <th >Attributes</th>
+                        <th width="230">
+                            <div class="btn-group">
+                                <asp:Button runat="server" CssClass="btn btn-default " OnClick="OnJsonClick" Text="Json"/>
+                                <asp:Button runat="server" CssClass="btn btn-default " OnClick="OnXmlClick" Text="Xml"/>
+                            </div>
+                            
                             <button type="button" title="Reload" onclick="loadList()" class="btn btn-primary pull-right">
-                            <i class="fa fa-refresh"></i>
-                        </button>
+                                <i class="fa fa-refresh"></i>
+                            </button>
                         </th>
                     </tr>                
                     <tr >
                         <td >
                             <div class="filter">
-                                <input class="form-control" id="nameFilter" onkeyup="filterChanged()"/>
+                                <input class="form-control" id="nameFilter" onkeyup="filterChanged(event)"/>
                             </div>
                         </td>
                         <td >  
                             <div class="filter">
-                            <input class="form-control" id="codeFilter" onkeyup="filterChanged()"/>
+                            <input class="form-control" id="codeFilter" onkeyup="filterChanged(event)" />
                         </div>
                         </td>
-
+                        
                         <td > <div class="filter">
-                            <input class="form-control" id="priceFilter" onkeyup="filterChanged()"/>
-                        </div></td>
+                            <input class="form-control" id="priceFilter" onkeyup="filterChanged(event)" type="text" pattern="\d*" title="Price value" />
+                        </div></td><td ></td>
                         <td> <button type="button" id="addButton" disabled="disabled" title="Add" onclick="createNewProduct(event)" class="btn btn-primary pull-right">
                            Add
                         </button></td>
@@ -54,10 +59,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    
                     <%--   <a title="Edit" class="link" onclick="editProduct(event)">
                                         <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true" style="padding-right: 5px"></span>
                                     </a>--%>
-                    <form></form>
+                    <form>
+                        <div class="row">
+                            <label class="col-sm-4 control-label">Name</label>
+                            <div class="col-sm-8">
+                                <input name="name" type="text" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -69,6 +82,7 @@
     <script>
         $(document).ready(function () {
             loadList();
+            $(".edit-mode").hide();
         });
     </script>
 </asp:Content>

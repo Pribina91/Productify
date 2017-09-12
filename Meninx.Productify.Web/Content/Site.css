@@ -44,3 +44,11 @@ textarea {
     display: inline-block;
     margin-left: 5px;
 }
+#productTable td {
+    vertical-align: middle;
+}
+
+#productTable tbody tr:hover td {
+    background-color: #eaeaea !important;
+    
+}

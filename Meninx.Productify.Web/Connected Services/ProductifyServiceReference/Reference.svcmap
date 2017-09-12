@@ -22,11 +22,13 @@
     <MetadataSource Address="http://localhost:4321/ProductifyService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ProductifyService3.xsd" MetadataType="Schema" ID="96ea8e0b-f402-4858-895c-ba1b51f2c5e6" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd0" />
-    <MetadataFile FileName="ProductifyService1.xsd" MetadataType="Schema" ID="3275f151-3991-4172-9afc-9b682ea9ca7d" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd1" />
-    <MetadataFile FileName="ProductifyService.wsdl" MetadataType="Wsdl" ID="36563e5d-d2ee-4122-94bd-3cc95805b9cc" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?wsdl" />
-    <MetadataFile FileName="ProductifyService.disco" MetadataType="Disco" ID="a797e218-2c2e-4968-8847-9229229d4598" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?disco" />
     <MetadataFile FileName="ProductifyService.xsd" MetadataType="Schema" ID="abb5e355-abef-4c22-805a-14f31a94a4b5" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd2" />
+    <MetadataFile FileName="ProductifyService4.xsd" MetadataType="Schema" ID="e801cb6b-8d92-4b91-a4e3-3276d84fb152" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd4" />
+    <MetadataFile FileName="ProductifyService.wsdl" MetadataType="Wsdl" ID="36563e5d-d2ee-4122-94bd-3cc95805b9cc" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?wsdl" />
+    <MetadataFile FileName="ProductifyService1.xsd" MetadataType="Schema" ID="3275f151-3991-4172-9afc-9b682ea9ca7d" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd1" />
+    <MetadataFile FileName="ProductifyService2.xsd" MetadataType="Schema" ID="e0dd10e7-fc8a-4f8f-8cd3-9e60344cb885" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd3" />
+    <MetadataFile FileName="ProductifyService.disco" MetadataType="Disco" ID="a797e218-2c2e-4968-8847-9229229d4598" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?disco" />
+    <MetadataFile FileName="ProductifyService3.xsd" MetadataType="Schema" ID="96ea8e0b-f402-4858-895c-ba1b51f2c5e6" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

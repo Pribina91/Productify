@@ -49,7 +49,7 @@ namespace Meninx.Productify.Data.Models
 
         public override string GetStringedValue()
         {
-            return this.Value.ToString(CultureInfo.CurrentCulture);
+            return this.Value.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
         }
     }
 }

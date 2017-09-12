@@ -139,6 +139,12 @@
     <None Include="Connected Services\ProductifyServiceReference\ProductifyService.disco" />
     <None Include="Connected Services\ProductifyServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\ProductifyServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\ProductifyServiceReference\ProductifyService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProductifyServiceReference\ProductifyService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ProductifyServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

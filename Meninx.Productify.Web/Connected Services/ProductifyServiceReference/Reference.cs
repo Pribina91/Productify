@@ -23,6 +23,9 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] AttributesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -41,6 +44,19 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Attributes {
+            get {
+                return this.AttributesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AttributesField, value) != true)) {
+                    this.AttributesField = value;
+                    this.RaisePropertyChanged("Attributes");
+                }
             }
         }
         
@@ -115,6 +131,18 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AttributeTypeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProductIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValueField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -122,6 +150,58 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AttributeTypeId {
+            get {
+                return this.AttributeTypeIdField;
+            }
+            set {
+                if ((this.AttributeTypeIdField.Equals(value) != true)) {
+                    this.AttributeTypeIdField = value;
+                    this.RaisePropertyChanged("AttributeTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductId {
+            get {
+                return this.ProductIdField;
+            }
+            set {
+                if ((this.ProductIdField.Equals(value) != true)) {
+                    this.ProductIdField = value;
+                    this.RaisePropertyChanged("ProductId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
             }
         }
         
@@ -140,10 +220,10 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
     public interface IProductifyService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetData", ReplyAction="http://tempuri.org/IProductifyService/GetDataResponse")]
-        Meninx.Productify.Web.ProductifyServiceReference.ProductContract[] GetData(string productName, string code);
+        Meninx.Productify.Web.ProductifyServiceReference.ProductContract[] GetData(string productName, string code, System.Nullable<int> price);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetData", ReplyAction="http://tempuri.org/IProductifyService/GetDataResponse")]
-        System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.ProductContract[]> GetDataAsync(string productName, string code);
+        System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.ProductContract[]> GetDataAsync(string productName, string code, System.Nullable<int> price);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/AddProduct", ReplyAction="http://tempuri.org/IProductifyService/AddProductResponse")]
         void AddProduct(Meninx.Productify.Web.ProductifyServiceReference.ProductContract product);
@@ -168,6 +248,18 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetProductAttributes", ReplyAction="http://tempuri.org/IProductifyService/GetProductAttributesResponse")]
         System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.AttributeContract[]> GetProductAttributesAsync(int productId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetXml", ReplyAction="http://tempuri.org/IProductifyService/GetXmlResponse")]
+        System.IO.FileInfo GetXml(string productName, string code, System.Nullable<int> price);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetXml", ReplyAction="http://tempuri.org/IProductifyService/GetXmlResponse")]
+        System.Threading.Tasks.Task<System.IO.FileInfo> GetXmlAsync(string productName, string code, System.Nullable<int> price);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetJson", ReplyAction="http://tempuri.org/IProductifyService/GetJsonResponse")]
+        System.IO.FileInfo GetJson(string productName, string code, System.Nullable<int> price);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetJson", ReplyAction="http://tempuri.org/IProductifyService/GetJsonResponse")]
+        System.Threading.Tasks.Task<System.IO.FileInfo> GetJsonAsync(string productName, string code, System.Nullable<int> price);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -197,12 +289,12 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public Meninx.Productify.Web.ProductifyServiceReference.ProductContract[] GetData(string productName, string code) {
-            return base.Channel.GetData(productName, code);
+        public Meninx.Productify.Web.ProductifyServiceReference.ProductContract[] GetData(string productName, string code, System.Nullable<int> price) {
+            return base.Channel.GetData(productName, code, price);
         }
         
-        public System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.ProductContract[]> GetDataAsync(string productName, string code) {
-            return base.Channel.GetDataAsync(productName, code);
+        public System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.ProductContract[]> GetDataAsync(string productName, string code, System.Nullable<int> price) {
+            return base.Channel.GetDataAsync(productName, code, price);
         }
         
         public void AddProduct(Meninx.Productify.Web.ProductifyServiceReference.ProductContract product) {
@@ -235,6 +327,22 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         
         public System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.AttributeContract[]> GetProductAttributesAsync(int productId) {
             return base.Channel.GetProductAttributesAsync(productId);
+        }
+        
+        public System.IO.FileInfo GetXml(string productName, string code, System.Nullable<int> price) {
+            return base.Channel.GetXml(productName, code, price);
+        }
+        
+        public System.Threading.Tasks.Task<System.IO.FileInfo> GetXmlAsync(string productName, string code, System.Nullable<int> price) {
+            return base.Channel.GetXmlAsync(productName, code, price);
+        }
+        
+        public System.IO.FileInfo GetJson(string productName, string code, System.Nullable<int> price) {
+            return base.Channel.GetJson(productName, code, price);
+        }
+        
+        public System.Threading.Tasks.Task<System.IO.FileInfo> GetJsonAsync(string productName, string code, System.Nullable<int> price) {
+            return base.Channel.GetJsonAsync(productName, code, price);
         }
     }
 }

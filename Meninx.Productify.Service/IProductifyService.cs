@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -15,7 +16,7 @@ namespace Meninx.Productify.Service
     public interface IProductifyService
     {
         [OperationContract]
-        List<ProductContract> GetData(string productName, string code);
+        List<ProductContract> GetData(string productName, string code, int? price);
 
         [OperationContract]
         void AddProduct(ProductContract product);
@@ -28,5 +29,11 @@ namespace Meninx.Productify.Service
 
         [OperationContract]
         List<AttributeContract> GetProductAttributes(int productId);
+
+        [OperationContract]
+        FileInfo GetXml(string productName, string code, int? price);
+
+        [OperationContract]
+        FileInfo GetJson(string productName, string code, int? price);
     }
 }

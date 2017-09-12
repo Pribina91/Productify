@@ -7,7 +7,7 @@ using Meninx.Productify.Data.Models;
 
 namespace Meninx.Productify.Core
 {
-    public class Repository<T> where T:BaseEntity
+    public class Repository<T> where T : BaseEntity
     {
         protected readonly IProductifyContext context;
         protected IDbSet<T> entities;
@@ -56,6 +56,14 @@ namespace Meninx.Productify.Core
                 {
                     throw new ArgumentNullException(nameof(entity));
                 }
+                var dbEntity = GetById(entity.Id);
+                if (dbEntity == null)
+                {
+                    throw new ArgumentException(nameof(entity));
+                }
+                //TODO fix updating
+                dbEntity = entity;
+
                 this.context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)

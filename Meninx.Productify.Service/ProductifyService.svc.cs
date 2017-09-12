@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -15,21 +16,49 @@ using Meninx.Productify.Data.Context;
 using Meninx.Productify.Data.Models;
 using Meninx.Productify.Service.Configuration;
 using Meninx.Productify.Service.Contracts;
+using Newtonsoft.Json;
 
 namespace Meninx.Productify.Service
 {
     public class ProductifyService : IProductifyService, IDisposable
-    { 
+    {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         private ProductRepository productRepository;
+
         public ProductifyService()
         {
             productRepository = new ProductRepository(unitOfWork.GetContext());
             AutoMapperConfiguration.Configure();
         }
 
-        public List<ProductContract> GetData(string productName, string code)
+        public FileInfo GetJson(string productName, string code, int? price)
+        {
+            var data = GetData(productName, code, price);
+
+            var serialized = JsonConvert.SerializeObject(data);
+            FileInfo file = new FileInfo(Guid.NewGuid() + "json.txt");
+            StreamWriter sw = file.AppendText();
+            sw.Write(serialized);
+            sw.Close();
+
+            return file;
+        }
+
+        public FileInfo GetXml(string productName, string code, int? price)
+        {
+            var data = GetData(productName, code, price);
+
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof(List<ProductContract>));
+            FileInfo file = new FileInfo(Guid.NewGuid() + ".xml");
+            StreamWriter sw = file.AppendText();
+            writer.Serialize(sw, data);
+            sw.Close();
+
+            return file;
+        }
+
+        public List<ProductContract> GetData(string productName, string code, int? price)
         {
             try
             {
@@ -49,7 +78,7 @@ namespace Meninx.Productify.Service
                              && q.Code.ToLower().Trim().Contains(code));
                 }
 
-                return query.ToList().Select(Mapper.Map<Product,ProductContract>).ToList();
+                return query.ToList().Select(Mapper.Map<Product, ProductContract>).ToList();
             }
             catch (Exception e)
             {
@@ -63,7 +92,8 @@ namespace Meninx.Productify.Service
             try
             {
                 var product = productRepository.GetById(productId);
-                var mapped = product.Attributes.ToList().Select(Mapper.Map<Meninx.Productify.Data.Models.Attribute, AttributeContract>).ToList();
+                var mapped = product.Attributes.ToList()
+                    .Select(Mapper.Map<Meninx.Productify.Data.Models.Attribute, AttributeContract>).ToList();
                 return mapped;
             }
             catch (Exception e)

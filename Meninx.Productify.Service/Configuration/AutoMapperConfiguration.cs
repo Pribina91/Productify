@@ -14,15 +14,20 @@ namespace Meninx.Productify.Service.Configuration
     {
         public static void Configure()
         {
-          
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Meninx.Productify.Data.Models.Attribute, AttributeContract>();
-                cfg.CreateMap<Product, ProductContract>();
-                cfg.CreateMap<ProductContract, Product>();
-                //.ForMember(m => m.Attributes, o => o.UseDestinationValue());
-                //cfg.AddProfile<FooProfile>();
-            });
+            Mapper.Initialize(
+                cfg =>
+                {
+                    cfg.CreateMap<Meninx.Productify.Data.Models.Attribute, AttributeContract>()
+                        .ForMember(d => d.Value, s => s.MapFrom(sm => sm.GetStringedValue()));
+                    cfg.CreateMap<Product, ProductContract>()
+                        .ForMember(
+                            d => d.Attributes,
+                            expression => expression.MapFrom(
+                                s => s.Attributes.Select(a => $"{a.AttributeType.Name}={a.GetStringedValue()}")));
+                    cfg.CreateMap<ProductContract, Product>();
+                    //.ForMember(m => m.Attributes, o => o.UseDestinationValue());
+                    //cfg.AddProfile<FooProfile>();
+                });
         }
     }
 }

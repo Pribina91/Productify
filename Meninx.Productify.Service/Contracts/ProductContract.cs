@@ -11,13 +11,17 @@ namespace Meninx.Productify.Service.Contracts
     {
         [DataMember]
         public int Id { get; set; }
+
         [DataMember]
         public int Price { get; set; }
+
         [DataMember]
         public string Name { get; set; }
+
         [DataMember]
         public string Code { get; set; }
 
-        //public List<AttributeContract> Attributes { get; set; }
+        [DataMember]
+        public List<string> Attributes { get; set; }
     }
 }

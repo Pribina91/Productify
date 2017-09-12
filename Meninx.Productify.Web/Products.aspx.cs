@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,9 @@ namespace Meninx.Productify.Web
         //protected List<ProductContract> Datalist;
 
         private static ProductifyServiceClient _service;
+        private static string _filterProductName;
+        private static string _filterCode;
+        private static int? _filterPrice;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,7 +29,7 @@ namespace Meninx.Productify.Web
         [System.Web.Services.WebMethod]
         public static string GetProducts(string productName, string code)
         {
-            var list = _service.GetData(productName, code).ToList();
+            var list = _service.GetData(null, null, null).ToList();
             return JsonConvert.SerializeObject(list);
         }
 
@@ -82,6 +86,38 @@ namespace Meninx.Productify.Web
             //{
             //    _service.Close();
             //}
+        }
+
+        [System.Web.Services.WebMethod]
+        public static void PostFilter(string name, string code, int? price)
+        {
+            _filterPrice = price;
+            _filterCode = code;
+            _filterProductName = name;
+        }
+
+        protected void OnJsonClick(object sender, EventArgs e)
+        {
+            var file = _service.GetJson(_filterProductName, _filterCode, _filterPrice);
+        }
+
+        protected void OnXmlClick(object sender, EventArgs e)
+        {
+            var file = _service.GetXml(_filterProductName, _filterCode, _filterPrice);
+            AddFileToResponse(file);
+        }
+
+        private void AddFileToResponse(FileInfo file)
+        {
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + file.Name);
+            Response.AddHeader("Content-Length", file.Length.ToString());
+            Response.ContentType = "text/plain";
+            Response.Flush();
+            Response.TransmitFile(file.FullName);
+            Response.End();
         }
     }
 }
