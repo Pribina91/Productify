@@ -18,6 +18,7 @@ using Meninx.Productify.Data.Models;
 using Meninx.Productify.Data.Models.Enums;
 using Meninx.Productify.Service.Configuration;
 using Meninx.Productify.Service.Contracts;
+using Meninx.Productify.Service.Exceptions;
 using Newtonsoft.Json;
 using Attribute = Meninx.Productify.Data.Models.Attribute;
 
@@ -112,6 +113,8 @@ namespace Meninx.Productify.Service
         {
             try
             {
+                ValidateProduct(product);
+
                 productRepository.Insert(Mapper.Map<ProductContract, Product>(product));
             }
             catch (Exception e)
@@ -125,6 +128,8 @@ namespace Meninx.Productify.Service
         {
             try
             {
+                ValidateProduct(product);
+
                 var dbProduct = productRepository.GetById(product.Id);
                 //map attribute 
                 dbProduct.Attributes.Clear();
@@ -157,11 +162,17 @@ namespace Meninx.Productify.Service
             }
         }
 
+
         public void RemoveProduct(int productId)
         {
             try
             {
                 var product = productRepository.GetById(productId);
+                if (product == null)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(productId));
+                }
+
                 productRepository.Delete(product);
             }
             catch (Exception e)
@@ -193,6 +204,46 @@ namespace Meninx.Productify.Service
         {
             unitOfWork.Dispose();
             //base.Dispose(disposing);
+        }
+
+
+        private void ValidateProduct(ProductContract product)
+        {
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+            if (string.IsNullOrEmpty(product.Name))
+            {
+                throw new ArgumentNullException(nameof(product.Name));
+            }
+            if (string.IsNullOrEmpty(product.Code))
+            {
+                throw new ArgumentNullException(nameof(product.Code));
+            }
+
+            if (product.Attributes == null)
+            {
+                throw new ArgumentNullException(nameof(product.Attributes));
+            }
+
+            foreach (var attribute in product.Attributes)
+            {
+                ValidateAttribute(attribute);
+            }
+        }
+
+        private void ValidateAttribute(AttributeContract attribute)
+        {
+            if (attribute == null)
+            {
+                throw new ArgumentNullException(nameof(attribute));
+            }
+
+            if (this.attributeTypeRepository.Table.Any(a => a.Id == attribute.AttributeTypeId))
+            {
+                throw new ArgumentOutOfRangeException(nameof(attribute.AttributeTypeId));
+            }
         }
     }
 }
