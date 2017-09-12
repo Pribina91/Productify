@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:4321/ProductifyService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Meninx.Productify.Service.Contracts" />
-  <xs:import schemaLocation="http://localhost:4321/ProductifyService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:import schemaLocation="http://localhost:4321/ProductifyService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
   <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence>
@@ -97,6 +97,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetJsonResult" nillable="true" type="q6:FileInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAttributeTypes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAttributeTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Meninx.Productify.Service.Contracts" minOccurs="0" name="GetAttributeTypesResult" nillable="true" type="q7:ArrayOfAttributeTypeContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

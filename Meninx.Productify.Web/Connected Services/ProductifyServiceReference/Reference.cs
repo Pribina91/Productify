@@ -23,7 +23,7 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] AttributesField;
+        private Meninx.Productify.Web.ProductifyServiceReference.AttributeContract[] AttributesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CodeField;
@@ -48,7 +48,7 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] Attributes {
+        public Meninx.Productify.Web.ProductifyServiceReference.AttributeContract[] Attributes {
             get {
                 return this.AttributesField;
             }
@@ -135,10 +135,10 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         private int AttributeTypeIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private string AttributeTypeNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ProductIdField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ValueField;
@@ -167,6 +167,19 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AttributeTypeName {
+            get {
+                return this.AttributeTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AttributeTypeNameField, value) != true)) {
+                    this.AttributeTypeNameField = value;
+                    this.RaisePropertyChanged("AttributeTypeName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
             get {
                 return this.IdField;
@@ -180,19 +193,6 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProductId {
-            get {
-                return this.ProductIdField;
-            }
-            set {
-                if ((this.ProductIdField.Equals(value) != true)) {
-                    this.ProductIdField = value;
-                    this.RaisePropertyChanged("ProductId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Value {
             get {
                 return this.ValueField;
@@ -201,6 +201,99 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
                 if ((object.ReferenceEquals(this.ValueField, value) != true)) {
                     this.ValueField = value;
                     this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AttributeTypeContract", Namespace="http://schemas.datacontract.org/2004/07/Meninx.Productify.Service.Contracts")]
+    [System.SerializableAttribute()]
+    public partial class AttributeTypeContract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DataTypeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DataTypeNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DataTypeId {
+            get {
+                return this.DataTypeIdField;
+            }
+            set {
+                if ((this.DataTypeIdField.Equals(value) != true)) {
+                    this.DataTypeIdField = value;
+                    this.RaisePropertyChanged("DataTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DataTypeName {
+            get {
+                return this.DataTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataTypeNameField, value) != true)) {
+                    this.DataTypeNameField = value;
+                    this.RaisePropertyChanged("DataTypeName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((this.NameField.Equals(value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -260,6 +353,12 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetJson", ReplyAction="http://tempuri.org/IProductifyService/GetJsonResponse")]
         System.Threading.Tasks.Task<System.IO.FileInfo> GetJsonAsync(string productName, string code, System.Nullable<int> price);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetAttributeTypes", ReplyAction="http://tempuri.org/IProductifyService/GetAttributeTypesResponse")]
+        Meninx.Productify.Web.ProductifyServiceReference.AttributeTypeContract[] GetAttributeTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductifyService/GetAttributeTypes", ReplyAction="http://tempuri.org/IProductifyService/GetAttributeTypesResponse")]
+        System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.AttributeTypeContract[]> GetAttributeTypesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -343,6 +442,14 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         
         public System.Threading.Tasks.Task<System.IO.FileInfo> GetJsonAsync(string productName, string code, System.Nullable<int> price) {
             return base.Channel.GetJsonAsync(productName, code, price);
+        }
+        
+        public Meninx.Productify.Web.ProductifyServiceReference.AttributeTypeContract[] GetAttributeTypes() {
+            return base.Channel.GetAttributeTypes();
+        }
+        
+        public System.Threading.Tasks.Task<Meninx.Productify.Web.ProductifyServiceReference.AttributeTypeContract[]> GetAttributeTypesAsync() {
+            return base.Channel.GetAttributeTypesAsync();
         }
     }
 }

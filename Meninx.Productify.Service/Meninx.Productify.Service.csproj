@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AutoMapperConfiguration.cs" />
     <Compile Include="Contracts\AttributeContract.cs" />
+    <Compile Include="Contracts\AttributeTypeContract.cs" />
     <Compile Include="Contracts\ProductContract.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

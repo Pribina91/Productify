@@ -9,13 +9,10 @@ using Meninx.Productify.Data.Models;
 
 namespace Meninx.Productify.Core.Repositories
 {
-    public class ProductRepository : Repository<Product>
+    public class AttributeTypeRepository : Repository<AttributeType>
     {
-        public ProductRepository(IProductifyContext context) : base(context)
+        public AttributeTypeRepository(IProductifyContext context) : base(context)
         {
-
         }
-
-        public override IQueryable<Product> Table => this.context.Products.AsQueryable();
     }
 }

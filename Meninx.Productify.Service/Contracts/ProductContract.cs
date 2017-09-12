@@ -22,6 +22,6 @@ namespace Meninx.Productify.Service.Contracts
         public string Code { get; set; }
 
         [DataMember]
-        public List<string> Attributes { get; set; }
+        public List<AttributeContract> Attributes { get; set; }
     }
 }

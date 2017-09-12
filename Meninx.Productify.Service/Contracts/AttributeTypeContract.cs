@@ -7,18 +7,18 @@ using System.Web;
 namespace Meninx.Productify.Service.Contracts
 {
     [DataContract]
-    public class AttributeContract
+    public class AttributeTypeContract
     {
         [DataMember]
         public int Id { get; set; }
 
         [DataMember]
-        public string Value { get; set; }
+        public int Name { get; set; }
 
         [DataMember]
-        public int AttributeTypeId { get; set; }
+        public int DataTypeId { get; set; }
 
         [DataMember]
-        public string AttributeTypeName { get; set; }
+        public string DataTypeName { get; set; }
     }
 }

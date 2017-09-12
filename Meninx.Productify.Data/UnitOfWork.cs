@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Meninx.Productify.Data.Context;
 using Meninx.Productify.Data.Models;
 
-namespace Meninx.Productify.Core
+namespace Meninx.Productify.Data
 {
     public class UnitOfWork : IDisposable
     {
@@ -11,7 +11,7 @@ namespace Meninx.Productify.Core
         private bool disposed;
         private Dictionary<string, object> repositories;
 
-        
+
         public UnitOfWork(ProductifyContext context)
         {
             this.context = context;
@@ -21,10 +21,12 @@ namespace Meninx.Productify.Core
         {
             context = new ProductifyContext();
         }
+
         public ProductifyContext GetContext()
         {
             return context;
         }
+
         public void Dispose()
         {
             Dispose(true);

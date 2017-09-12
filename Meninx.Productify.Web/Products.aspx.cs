@@ -23,6 +23,7 @@ namespace Meninx.Productify.Web
         {
             _service = new ProductifyServiceReference.ProductifyServiceClient();
             Page.ClientScript.RegisterClientScriptInclude("Product", ResolveUrl("~/Scripts/Pages/Products.js"));
+            var attrTypes = _service.GetAttributeTypes();
         }
 
 

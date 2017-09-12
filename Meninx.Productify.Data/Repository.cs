@@ -5,7 +5,7 @@ using System.Linq;
 using Meninx.Productify.Data.Context;
 using Meninx.Productify.Data.Models;
 
-namespace Meninx.Productify.Core
+namespace Meninx.Productify.Data
 {
     public class Repository<T> where T : BaseEntity
     {
@@ -61,8 +61,6 @@ namespace Meninx.Productify.Core
                 {
                     throw new ArgumentException(nameof(entity));
                 }
-                //TODO fix updating
-                dbEntity = entity;
 
                 this.context.SaveChanges();
             }

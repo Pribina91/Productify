@@ -35,5 +35,8 @@ namespace Meninx.Productify.Service
 
         [OperationContract]
         FileInfo GetJson(string productName, string code, int? price);
+
+        [OperationContract]
+        List<AttributeTypeContract> GetAttributeTypes();
     }
 }

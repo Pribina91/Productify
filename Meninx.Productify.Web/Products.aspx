@@ -1,5 +1,5 @@
 ﻿
-<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="Meninx.Productify.Web.Products" %>
+<%@ Page Title="Products" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="Meninx.Productify.Web.Products" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
@@ -47,8 +47,17 @@
             </table>
         </div>
     </div>
-  
-    <!-- Modal -->
+  <div style="display:none">
+      <ul>
+          <asp:Repeater runat="server">
+              <ItemTemplate>
+                  <li><input type="checkbox" value=""/></li>
+              </ItemTemplate>
+          </asp:Repeater>
+      </ul>
+      
+  </div>
+<%--    <!-- Modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -59,11 +68,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    
-                    <%--   <a title="Edit" class="link" onclick="editProduct(event)">
-                                        <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true" style="padding-right: 5px"></span>
-                                    </a>--%>
-                    <form>
+                          <form>
                         <div class="row">
                             <label class="col-sm-4 control-label">Name</label>
                             <div class="col-sm-8">
@@ -78,7 +83,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
     <script>
         $(document).ready(function () {
             loadList();

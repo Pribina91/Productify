@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -25,10 +26,12 @@ namespace Meninx.Productify.Service
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         private ProductRepository productRepository;
+        private AttributeTypeRepository attributeTypeRepository;
 
         public ProductifyService()
         {
             productRepository = new ProductRepository(unitOfWork.GetContext());
+            attributeTypeRepository = new AttributeTypeRepository(unitOfWork.GetContext());
             AutoMapperConfiguration.Configure();
         }
 
@@ -120,7 +123,9 @@ namespace Meninx.Productify.Service
         {
             try
             {
-                productRepository.Update(Mapper.Map<ProductContract, Product>(product));
+                var dbProduct = productRepository.GetById(product.Id);
+
+                productRepository.Update(Mapper.Map<ProductContract, Product>(product, dbProduct));
             }
             catch (Exception e)
             {
@@ -135,6 +140,21 @@ namespace Meninx.Productify.Service
             {
                 var product = productRepository.GetById(productId);
                 productRepository.Delete(product);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public List<AttributeTypeContract> GetAttributeTypes()
+        {
+            try
+            {
+                var attributeTypeContracts = attributeTypeRepository.Table.ProjectTo<AttributeTypeContract>().ToList();
+
+                return attributeTypeContracts;
             }
             catch (Exception e)
             {

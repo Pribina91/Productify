@@ -23,7 +23,6 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="ProductifyService.xsd" MetadataType="Schema" ID="abb5e355-abef-4c22-805a-14f31a94a4b5" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd2" />
-    <MetadataFile FileName="ProductifyService4.xsd" MetadataType="Schema" ID="e801cb6b-8d92-4b91-a4e3-3276d84fb152" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd4" />
     <MetadataFile FileName="ProductifyService.wsdl" MetadataType="Wsdl" ID="36563e5d-d2ee-4122-94bd-3cc95805b9cc" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?wsdl" />
     <MetadataFile FileName="ProductifyService1.xsd" MetadataType="Schema" ID="3275f151-3991-4172-9afc-9b682ea9ca7d" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd1" />
     <MetadataFile FileName="ProductifyService2.xsd" MetadataType="Schema" ID="e0dd10e7-fc8a-4f8f-8cd3-9e60344cb885" SourceId="1" SourceUrl="http://localhost:4321/ProductifyService?xsd=xsd3" />
