@@ -30,7 +30,26 @@ namespace Meninx.Productify.Service.Configuration
                         .ForMember(
                             d => d.Attributes,
                             expression => expression.MapFrom(s => s.Attributes));
-                    cfg.CreateMap<ProductContract, Product>();
+                    cfg.CreateMap<ProductContract, Product>()
+                        .ForMember(d => d.Attributes, expression => expression.Ignore())
+                        .ForSourceMember(s => s.Attributes, expression => expression.Ignore());
+                    cfg.CreateMap<AttributeContract, StringAtrribute>()
+                        .ForMember(d => d.Value, s => s.MapFrom(sm => sm.Value))
+                        .ForMember(d => d.AttributeTypeId, s => s.MapFrom(sm => sm.AttributeTypeId))
+                        .ForMember(d => d.Id, s => s.MapFrom(sm => sm.Id));
+                    cfg.CreateMap<AttributeContract, DatetimeAtrribute>()
+                        .ForMember(d => d.Value, s => s.MapFrom(sm => Convert.ToDateTime(sm.Value)))
+                        .ForMember(d => d.AttributeTypeId, s => s.MapFrom(sm => sm.AttributeTypeId))
+                        .ForMember(d => d.Id, s => s.MapFrom(sm => sm.Id));
+                    cfg.CreateMap<AttributeContract, IntegerAtrribute>()
+                        .ForMember(d => d.Value, s => s.MapFrom(sm => Convert.ToInt32(sm.Value)))
+                        .ForMember(d => d.AttributeTypeId, s => s.MapFrom(sm => sm.AttributeTypeId))
+                        .ForMember(d => d.Id, s => s.MapFrom(sm => sm.Id));
+                    //cfg.CreateMap<AttributeContract,Meninx.Productify.Data.Models.Attribute>()
+                    //cfg.
+                    //.ForMember(d=>d.AttributeTypeId, sm => sm.MapFrom(s => s.AttributeTypeId))
+                    //.ForMember(d=>d., sm => sm.MapFrom(s => s.AttributeTypeId))
+                    //.ForMember()
                     //.ForMember(m => m.Attributes, o => o.UseDestinationValue());
                     //cfg.AddProfile<FooProfile>();
                 });

@@ -9,7 +9,7 @@
                     <tr >
                         <th >Name</th>
                         <th >Code</th>
-                        <th >Price</th> <th >Attributes</th>
+                        <th >Price</th> <th width="300">Attributes</th>
                         <th width="230">
                             <div class="btn-group">
                                 <asp:Button runat="server" CssClass="btn btn-default " OnClick="OnJsonClick" Text="Json"/>
@@ -47,15 +47,20 @@
             </table>
         </div>
     </div>
-  <div style="display:none">
-      <ul>
-          <asp:Repeater runat="server">
-              <ItemTemplate>
-                  <li><input type="checkbox" value=""/></li>
-              </ItemTemplate>
-          </asp:Repeater>
-      </ul>
-      
+  <div id="ddAttributeTypeList">
+      <div class="dropdown edit-mode">
+          <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">AttributeName
+              <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+              <asp:Repeater runat="server" ID="attributeTypeListRepeater" >
+                  <ItemTemplate>
+                      <li>
+                          <a data-attribute-type-id="<%# Eval("Id") %>" data-attribute-name="<%# Eval("Name") %>" href="#" onclick="addAttribute(event)"><%# Eval("Name") %></a>
+                      </li>
+                  </ItemTemplate>
+              </asp:Repeater>
+          </ul>
+      </div>
   </div>
 <%--    <!-- Modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

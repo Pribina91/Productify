@@ -15,9 +15,11 @@ using Meninx.Productify.Core.Repositories;
 using Meninx.Productify.Data;
 using Meninx.Productify.Data.Context;
 using Meninx.Productify.Data.Models;
+using Meninx.Productify.Data.Models.Enums;
 using Meninx.Productify.Service.Configuration;
 using Meninx.Productify.Service.Contracts;
 using Newtonsoft.Json;
+using Attribute = Meninx.Productify.Data.Models.Attribute;
 
 namespace Meninx.Productify.Service
 {
@@ -124,8 +126,29 @@ namespace Meninx.Productify.Service
             try
             {
                 var dbProduct = productRepository.GetById(product.Id);
-
-                productRepository.Update(Mapper.Map<ProductContract, Product>(product, dbProduct));
+                //map attribute 
+                dbProduct.Attributes.Clear();
+                var attributes = new List<Attribute>();
+                foreach (var attribute in product.Attributes)
+                {
+                    var dbType = attributeTypeRepository.GetById(attribute.AttributeTypeId);
+                    switch (dbType.DataType)
+                    {
+                        case AttributeTypeDataType.StringValue:
+                            dbProduct.Attributes.Add(Mapper.Map<AttributeContract, StringAtrribute>(attribute));
+                            break;
+                        case AttributeTypeDataType.IntegerValue:
+                            dbProduct.Attributes.Add(Mapper.Map<AttributeContract, IntegerAtrribute>(attribute));
+                            break;
+                        case AttributeTypeDataType.DatetimeValue:
+                            dbProduct.Attributes.Add(Mapper.Map<AttributeContract, DatetimeAtrribute>(attribute));
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+                dbProduct = Mapper.Map<ProductContract, Product>(product, dbProduct);
+                productRepository.Update(dbProduct);
             }
             catch (Exception e)
             {
@@ -152,7 +175,10 @@ namespace Meninx.Productify.Service
         {
             try
             {
-                var attributeTypeContracts = attributeTypeRepository.Table.ProjectTo<AttributeTypeContract>().ToList();
+                var attributeTypeContracts = attributeTypeRepository.Table
+                    .AsEnumerable()
+                    .Select(Mapper.Map<AttributeType, AttributeTypeContract>)
+                    .ToList();
 
                 return attributeTypeContracts;
             }

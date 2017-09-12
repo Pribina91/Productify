@@ -138,7 +138,7 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         private string AttributeTypeNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ValueField;
@@ -180,7 +180,7 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }
@@ -234,7 +234,7 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NameField;
+        private string NameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -286,12 +286,12 @@ namespace Meninx.Productify.Web.ProductifyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Name {
+        public string Name {
             get {
                 return this.NameField;
             }
             set {
-                if ((this.NameField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
                 }

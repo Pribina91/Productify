@@ -25,34 +25,44 @@ function loadList() {
 
                     result.push("<td class=\"tb-name\">" +
                         "<div class='read-mode'>" + object.Name + "</div>" +
-                        "<input name='Name' id='inName' value='" + object.Name + "' class='edit-mode form-control' style='display:none' /></td>");
+                        "<input name='Name' id='inName' value='" + object.Name + "' class='edit-mode form-control' /></td>");
                     result.push("<td class=\"tb-code\">" +
                         "<div class='read-mode'>" + object.Code + "</div>" +
-                        "<input name='Code' id='inCode' value='" + object.Code + "' class='edit-mode form-control' style='display:none'/></td>");
+                        "<input name='Code' id='inCode' value='" + object.Code + "' class='edit-mode form-control' /></td>");
                     result.push("<td class=\"tb-price\">" +
                         "<div class='read-mode'>" + object.Price + "</div>" +
                         "<input name='Price' id='inPrice' value='" + object.Price + "'type='text' pattern='\\d*' class='edit-mode form-control' style='display:none'/>" +
                         "</td>");
-                    result.push("<td>");
+                    result.push("<td><div class='attribute-list'>");
                     var attributes = object.Attributes;
                     for (var j = 0; j < attributes.length; j++) {
-                        result.push("<div class=\"tb-attribute-item\">" + attributes[j] + "</div>");
+                        result.push(getAttributeHtml(attributes[j].AttributeTypeId, attributes[j].AttributeTypeName, attributes[j].Value, attributes[j].Id));
                     }
+                    
+                    result.push("</div><div class='dropdownHolder' ><div>");
                     result.push("</td>");
                     result.push("<td>"
                         + "<button title='Delete' type='button' class='btn btn-danger pull-right' onclick='deleteProduct(event)' >Delete</button>" 
                         + "<button title='Edit' id='btnEdit' type='button' class='btn btn-default pull-right read-mode' onclick='openProductDetail(event)' >Edit</button>" +
                         "<div class='btn-group'>"
-                        + "<button title='Save' id='btnSave' style='display:none' type='button' class='btn btn-primary edit-mode' onclick='updateProduct(event)' >Save</button>"
-                        + "<button title='Cancel' id='btnCancel' style='display:none' type='button' class='btn btn-default edit-mode' onclick='cancelProductDetail(event)' >Cancel</button>" +
+                        + "<button title='Save' id='btnSave'  type='button' class='btn btn-primary edit-mode' onclick='updateProduct(event)' >Save</button>"
+                        + "<button title='Cancel' id='btnCancel' type='button' class='btn btn-default edit-mode' onclick='cancelProductDetail(event)' >Cancel</button>" +
                         "</div>" +
                         "</td></tr>");
 
                 }
                 $("#productTable tbody").html(result.join(""));
+                $(".edit-mode").hide();
             }
         }
     });
+}
+
+function getAttributeHtml(typeId,typeName,value,id) {
+    return "<div class=\"tb-attribute-item\">" + typeName + ":" +
+        "<span class='read-mode'>" + value + "</span>" +
+        "<input style='width: 50%;' class='form-control attribute-edit edit-mode' data-type-id='" + typeId + "' data-id='" + id + "' data-attribute-name='" + typeName + "' value='" + value + "'/>" +
+        "</div>"
 }
 function filterChanged() {
     var name = $("#nameFilter").val().toUpperCase();
@@ -149,7 +159,16 @@ function cancelProductDetail(event) {
     var lineOfInterest = $(sender).closest("tr");
     lineOfInterest.find(".read-mode").show();
 }
+function addAttribute(event) {
+    if (event == null || event.target == null) {
+        return;
+    }
+    var sender = event.target;
+    var attributeTypeId = $(sender).data("attribute-type-id");
+    var attributeName = $(sender).data("attribute-name");
 
+    $(sender).closest("tr").find(".attribute-list").append(getAttributeHtml(attributeTypeId, attributeName, ""));
+}
 
 function openProductDetail(event) {
     if (event == null || event.target == null) {
@@ -158,6 +177,7 @@ function openProductDetail(event) {
     var sender = event.target;
     $(".edit-mode").hide();
     var lineOfInterest = $(sender).closest("tr");
+    lineOfInterest.find(".dropdownHolder").html($("#ddAttributeTypeList").html());
     lineOfInterest.find(".read-mode").hide();
     lineOfInterest.find(".edit-mode").show();
 
@@ -170,10 +190,20 @@ function updateProduct(event) {
 
     var sender = event.target;
     var lineOfinterest = $(sender).closest("tr");
+    var attributesArray = lineOfinterest.find(".attribute-edit")
+        .map(function (index, element) {
+            var id = $(element).data("id");
+            if (id == 'undefined') {
+                id = null;
+            }
+            debugger;
+            return { "AttributeTypeId": $(element).data("type-id"), "Value": $(element).val(), "Id": id }
+    }).toArray();
+    debugger;
     $.ajax({
         type: "POST",
         url: "Products.aspx/UpdateProduct",
-        data: "{'product':" + JSON.stringify({ Id: lineOfinterest.data("product-id"), Name: lineOfinterest.find("#inName").val(), Code: lineOfinterest.find("#inCode").val(), Price: lineOfinterest.find("#inPrice").val() }) + "}",
+        data: "{'product':" + JSON.stringify({ Id: lineOfinterest.data("product-id"), Name: lineOfinterest.find("#inName").val(), Code: lineOfinterest.find("#inCode").val(), Price: lineOfinterest.find("#inPrice").val(), Attributes: attributesArray }) + "}",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {

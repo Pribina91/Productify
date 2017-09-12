@@ -26,7 +26,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="AttributeTypeId" type="xs:int" />
       <xs:element minOccurs="0" name="AttributeTypeName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -42,7 +42,7 @@
       <xs:element minOccurs="0" name="DataTypeId" type="xs:int" />
       <xs:element minOccurs="0" name="DataTypeName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AttributeTypeContract" nillable="true" type="tns:AttributeTypeContract" />

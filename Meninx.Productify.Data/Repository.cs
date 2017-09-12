@@ -59,7 +59,8 @@ namespace Meninx.Productify.Data
                 var dbEntity = GetById(entity.Id);
                 if (dbEntity == null)
                 {
-                    throw new ArgumentException(nameof(entity));
+                    Insert(entity);
+                    return;
                 }
 
                 this.context.SaveChanges();

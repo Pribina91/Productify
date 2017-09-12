@@ -9,8 +9,12 @@ namespace Meninx.Productify.Service.Contracts
     [DataContract]
     public class AttributeContract
     {
+        public AttributeContract()
+        {
+        }
+
         [DataMember]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [DataMember]
         public string Value { get; set; }

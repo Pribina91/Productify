@@ -13,7 +13,7 @@ namespace Meninx.Productify.Service.Contracts
         public int Id { get; set; }
 
         [DataMember]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         [DataMember]
         public int DataTypeId { get; set; }
